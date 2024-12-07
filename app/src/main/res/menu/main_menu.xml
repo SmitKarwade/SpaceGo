@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:title="missions"
+        android:id="@+id/nav_missions"
+        android:icon="@drawable/rocketdark"
+        app:showAsAction="always"
+        />
+
+    <item
+        android:title="ticket"
+        android:id="@+id/nav_ticket"
+        android:icon="@drawable/ticket"
+        app:showAsAction="always"/>
+
+    <item
+        android:title="community"
+        android:id="@+id/nav_community"
+        android:icon="@drawable/solidarity"
+        app:showAsAction="always"/>
+
+    <item
+        android:title="training"
+        android:id="@+id/nav_training"
+        android:icon="@drawable/mentoring"
+        app:showAsAction="always"/>
+
+    <item
+        android:title="profile"
+        android:id="@+id/nav_profile"
+        android:icon="@drawable/recipeuser"
+        app:showAsAction="always"/>
+</menu>
