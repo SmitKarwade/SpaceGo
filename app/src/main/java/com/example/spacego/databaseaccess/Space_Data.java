@@ -1,11 +1,16 @@
 package com.example.spacego.databaseaccess;
 
-public class Space_Data {
+import android.os.Parcel;
+import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
+
+public class Space_Data implements Parcelable {
+
+    private Integer id;
     private String missionName;
     private String organization;
-    private String summary;
-    private String description;
+    private String summary;private String description;
     private String launchDate;
     private String vehicle;
     private String launchSite;
@@ -29,6 +34,14 @@ public class Space_Data {
     }
 
     public Space_Data() {
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getMissionName() {
@@ -117,5 +130,74 @@ public class Space_Data {
 
     public void setPublicAvailability(String publicAvailability) {
         this.publicAvailability = publicAvailability;
+    }
+
+    protected Space_Data(Parcel in) {
+        // Read id
+        if (in.readInt() == 0) {
+            id = null;
+        } else {
+            id = in.readInt();
+        }
+        missionName = in.readString();
+        organization = in.readString();
+        summary = in.readString();
+        description = in.readString();
+        launchDate = in.readString();
+        vehicle = in.readString();
+        launchSite = in.readString();
+        // Read massKg
+        if (in.readInt() == 0) {
+            massKg = null;
+        } else {
+            massKg = in.readInt();
+        }
+        fundingAgency = in.readString();
+        publicAvailability = in.readString();
+        time = in.readString();
+    }
+
+    public static final Creator<Space_Data> CREATOR = new Creator<Space_Data>() {
+        @Override
+        public Space_Data createFromParcel(Parcel source) {
+            return new Space_Data(source);
+        }
+
+        @Override
+        public Space_Data[] newArray(int size) {
+            return new Space_Data[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel dest, int flags) {// Write id
+        if (id == null) {
+            dest.writeInt(0);
+        } else {
+            dest.writeInt(1);
+            dest.writeInt(id);
+        }
+        dest.writeString(missionName);
+        dest.writeString(organization);
+        dest.writeString(summary);
+        dest.writeString(description);
+        dest.writeString(launchDate);
+        dest.writeString(vehicle);
+        dest.writeString(launchSite);
+        // Write massKg
+        if (massKg == null) {
+            dest.writeInt(0);
+        } else {
+            dest.writeInt(1);
+            dest.writeInt(massKg);
+        }
+        dest.writeString(fundingAgency);
+        dest.writeString(publicAvailability);
+        dest.writeString(time);
     }
 }
