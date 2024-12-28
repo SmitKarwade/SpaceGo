@@ -1,6 +1,7 @@
 package com.example.spacego.recylerview;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,10 +9,17 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.spacego.MainActivity;
 import com.example.spacego.R;
 import com.example.spacego.databaseaccess.Space_Data;
+import com.example.spacego.fragments.MissionFragment;
+import com.example.spacego.missiondata.FullDataActivity;
+import com.example.spacego.viewmodel.SpaceViewmodel;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.textview.MaterialTextView;
 
@@ -45,8 +53,12 @@ public class Horizontal_adapter extends RecyclerView.Adapter<Horizontal_adapter.
         holder.launchText.setText(item.getTime());
         holder.publicMark.setText(item.getPublicAvailability());
 
-
-
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, FullDataActivity.class);
+            intent.putExtra("Item", item);
+            Log.d("Item", item.getMissionName());
+            context.startActivity(intent);
+        });
     }
 
     @Override
@@ -72,7 +84,6 @@ public class Horizontal_adapter extends RecyclerView.Adapter<Horizontal_adapter.
             missionNameText = itemView.findViewById(R.id.missionNameText);
             launchText = itemView.findViewById(R.id.launchText);
             publicMark = itemView.findViewById(R.id.publicMark);
-
         }
     }
 }
