@@ -9,7 +9,7 @@ public class Retrofit_space {
     public static RetroService getRetrofitInst() {
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
-                    .baseUrl("http://192.168.18.202:8080")  // Use HTTP unless you're sure about HTTPS
+                    .baseUrl("http://127.0.0.1:8080")  // Use HTTP unless you're sure about HTTPS
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }
