@@ -5,6 +5,7 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.spacego.databaseaccess.SpaceRepo;
@@ -14,7 +15,6 @@ import java.util.ArrayList;
 
 public class SpaceViewmodel extends AndroidViewModel {
     private SpaceRepo spaceRepo;
-    private LiveData<ArrayList<Space_Data>>  liveData;
 
     public SpaceViewmodel(@NonNull Application application) {
         super(application);
