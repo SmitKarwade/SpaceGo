@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.spacego.R;
 import com.example.spacego.databaseaccess.Space_Data;
 import com.example.spacego.modal.OrgWise;
+import com.example.spacego.viewmodel.SpaceViewmodel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,9 +42,7 @@ public class Vertcial_Adapter extends RecyclerView.Adapter<Vertcial_Adapter.Vert
         OrgWise orgWiseItem = orgWiseList.get(position);
         holder.textView.setText(orgWiseItem.getOrg());
 
-        // Update the data of the existing Horizontal_adapter
         holder.horizontalAdapter.UpdateData(orgWiseItem.getListMisssion());
-        Log.d("reycle", "onBindViewHolder: " + orgWiseItem.getListMisssion().size() + "  " + orgWiseList.get(0).getListMisssion().size());
     }
 
     @Override
