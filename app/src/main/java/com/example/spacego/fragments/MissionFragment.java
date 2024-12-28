@@ -19,6 +19,7 @@ import com.example.spacego.R;
 import com.example.spacego.databaseaccess.SpaceRepo;
 import com.example.spacego.databaseaccess.Space_Data;
 import com.example.spacego.modal.OrgWise;
+import com.example.spacego.recylerview.Horizontal_adapter;
 import com.example.spacego.recylerview.Vertcial_Adapter;
 import com.example.spacego.viewmodel.SpaceViewmodel;
 
@@ -74,6 +75,7 @@ public class MissionFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
         viewmodel = new ViewModelProvider(this).get(SpaceViewmodel.class);
+
         viewmodel.getLiveData("nasa").observe(getViewLifecycleOwner(), new Observer<ArrayList<Space_Data>>() {
             @Override
             public void onChanged(ArrayList<Space_Data> spaceData) {
