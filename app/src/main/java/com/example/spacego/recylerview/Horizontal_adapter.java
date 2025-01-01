@@ -56,7 +56,7 @@ public class Horizontal_adapter extends RecyclerView.Adapter<Horizontal_adapter.
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, FullDataActivity.class);
             intent.putExtra("Item", item);
-            Log.d("Item", item.getMissionName());
+            Log.d("Item", item.getAmountRS() + " ");
             context.startActivity(intent);
         });
     }
