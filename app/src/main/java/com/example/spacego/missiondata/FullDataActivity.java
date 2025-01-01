@@ -2,6 +2,7 @@ package com.example.spacego.missiondata;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -13,21 +14,30 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.widget.ViewPager2;
 import com.example.spacego.R;
+import com.example.spacego.databaseaccess.Cart;
+import com.example.spacego.databaseaccess.SpaceRepo;
 import com.example.spacego.databaseaccess.Space_Data;
 import com.example.spacego.fragments.LaunchDetails;
 import com.example.spacego.fragments.MissionDetails;
 import com.example.spacego.fragments.TechnicalDetails;
 import com.example.spacego.fragments.TimeDetails;
+import com.example.spacego.recylerview.CartAdapter;
 import com.example.spacego.viewmodel.SpaceViewmodel;
 import com.example.spacego.viewpager.ViewpagerAdapter;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class FullDataActivity extends AppCompatActivity {
 
     private TabLayout tabLayout;
     private ViewPager2 viewPager2;
     private ViewpagerAdapter viewpagerAdapter;
+    private MaterialButton add_msn_btn;
+    private SpaceRepo spaceRepo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +52,8 @@ public class FullDataActivity extends AppCompatActivity {
 
         tabLayout = findViewById(R.id.tabLayout);
         viewPager2 = findViewById(R.id.viewPager2);
+        add_msn_btn = findViewById(R.id.add_msn_btn);
+        spaceRepo = new SpaceRepo(this);
 
         MissionDetails missionDetailsFragment = new MissionDetails();
         LaunchDetails launchDetails = new LaunchDetails();
@@ -90,5 +102,18 @@ public class FullDataActivity extends AppCompatActivity {
                 tab.setText(tabNames[position]); // Set tab name based on position
             }
         }).attach();
+
+        add_msn_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Cart cart = missionDetailsFragment.getCartData();
+                if (cart != null){
+                    spaceRepo.addToCart(cart);
+                }else{
+                    Toast.makeText(FullDataActivity.this, "unable to add", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
+
 }
