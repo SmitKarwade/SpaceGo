@@ -16,7 +16,9 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.spacego.R;
+import com.example.spacego.databaseaccess.Cart;
 import com.example.spacego.databaseaccess.Space_Data;
+import com.example.spacego.missiondata.FullDataActivity;
 import com.example.spacego.viewmodel.SpaceViewmodel;
 import com.google.android.material.textview.MaterialTextView;
 
@@ -54,5 +56,10 @@ public class MissionDetails extends Fragment {
         org_name_text.setText(item.getOrganization());
         summary_text.setText(item.getSummary());
         desc_text.setText(item.getDescription());
+    }
+
+    public Cart getCartData(){
+        Cart cart = new Cart(item.getId(), item.getMissionName(), item.getOrganization(), item.getSummary(), item.getAmountRS());
+        return cart;
     }
 }
