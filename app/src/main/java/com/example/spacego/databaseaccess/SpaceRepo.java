@@ -18,6 +18,8 @@ public class SpaceRepo {
     private RetroService retroService;
     private Context context;
     private Map<String, MutableLiveData<ArrayList<Space_Data>>> dataMap = new HashMap<>();
+    private MutableLiveData<List<Cart>> cartItems = new MutableLiveData<>();
+    List<Cart> list = new ArrayList<>();
 
     public SpaceRepo(Context context) {
         this.retroService = Retrofit_space.getRetrofitInst();
@@ -48,9 +50,63 @@ public class SpaceRepo {
 
             @Override
             public void onFailure(Call<List<Space_Data>> call, Throwable throwable) {
-                Toast.makeText(context, "get " + throwable.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "get mission" + throwable.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
         return dataArrayList;
+    }
+
+    public MutableLiveData<List<Cart>> getCartItems(){
+        Call<List<Cart>> call = retroService.getCart();
+        call.enqueue(new Callback<List<Cart>>() {
+
+            @Override
+            public void onResponse(Call<List<Cart>> call, Response<List<Cart>> response) {
+                if (response.isSuccessful() && response.body() != null){
+                    list.clear();
+                    list.addAll(response.body());
+                    cartItems.postValue(list);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Cart>> call, Throwable throwable) {
+                Toast.makeText(context, "get cart" + throwable.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        return cartItems;
+    }
+
+    public void addToCart(Cart item){
+        Call<Void> call = retroService.addToCart(item);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()){
+                    Toast.makeText(context, "queued", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable throwable) {
+                Toast.makeText(context, "unable to queue", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void removeFromCart(Integer id){
+        Call<String> call = retroService.removeFromCart(id);
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if (response.isSuccessful()){
+                    Toast.makeText(context, "" + response.message(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable throwable) {
+            }
+        });
     }
 }
