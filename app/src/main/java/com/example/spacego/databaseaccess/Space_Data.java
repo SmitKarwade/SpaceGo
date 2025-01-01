@@ -10,7 +10,8 @@ public class Space_Data implements Parcelable {
     private Integer id;
     private String missionName;
     private String organization;
-    private String summary;private String description;
+    private String summary;
+    private String description;
     private String launchDate;
     private String vehicle;
     private String launchSite;
@@ -18,8 +19,9 @@ public class Space_Data implements Parcelable {
     private String fundingAgency;
     private String time;
     private String publicAvailability;
+    private Float amountRS;
 
-    public Space_Data(String missionName, String organization, String summary, String description, String launchDate, String vehicle, String launchSite, Integer massKg, String fundingAgency, String time, String publicAvailability) {
+    public Space_Data(String missionName, String organization, String summary, String description, String launchDate, String vehicle, String launchSite, Integer massKg, String fundingAgency, String time, String publicAvailability, Float amountRS) {
         this.missionName = missionName;
         this.organization = organization;
         this.summary = summary;
@@ -31,6 +33,7 @@ public class Space_Data implements Parcelable {
         this.fundingAgency = fundingAgency;
         this.time = time;
         this.publicAvailability = publicAvailability;
+        this.amountRS = amountRS;
     }
 
     public Space_Data() {
@@ -132,6 +135,14 @@ public class Space_Data implements Parcelable {
         this.publicAvailability = publicAvailability;
     }
 
+    public Float getAmountRS() {
+        return amountRS;
+    }
+
+    public void setAmountRS(Float amountRS) {
+        this.amountRS = amountRS;
+    }
+
     protected Space_Data(Parcel in) {
         // Read id
         if (in.readInt() == 0) {
@@ -155,6 +166,7 @@ public class Space_Data implements Parcelable {
         fundingAgency = in.readString();
         publicAvailability = in.readString();
         time = in.readString();
+        amountRS = in.readFloat();
     }
 
     public static final Creator<Space_Data> CREATOR = new Creator<Space_Data>() {
@@ -199,5 +211,6 @@ public class Space_Data implements Parcelable {
         dest.writeString(fundingAgency);
         dest.writeString(publicAvailability);
         dest.writeString(time);
+        dest.writeFloat(amountRS);
     }
 }
