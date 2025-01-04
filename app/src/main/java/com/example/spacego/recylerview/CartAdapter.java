@@ -56,10 +56,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewholder
             holder.removeBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(context, "RemoveButton", Toast.LENGTH_SHORT).show();
                     spaceRepo.removeFromCart(item.getCartId());
-                    notifyDataSetChanged();
-                    Toast.makeText(context, "" + list.size(), Toast.LENGTH_SHORT).show();
+                    list.remove(holder.getAdapterPosition());
+                    notifyItemRemoved(holder.getAdapterPosition());
                 }
             });
         }
