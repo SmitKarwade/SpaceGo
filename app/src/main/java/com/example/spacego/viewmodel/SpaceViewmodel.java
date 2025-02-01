@@ -8,10 +8,12 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.spacego.databaseaccess.Cart;
 import com.example.spacego.databaseaccess.SpaceRepo;
 import com.example.spacego.databaseaccess.Space_Data;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SpaceViewmodel extends AndroidViewModel {
     private SpaceRepo spaceRepo;
@@ -23,5 +25,9 @@ public class SpaceViewmodel extends AndroidViewModel {
 
     public LiveData<ArrayList<Space_Data>> getLiveData(String orgName){
         return spaceRepo.getOrgWise(orgName);
+    }
+
+    public LiveData<List<Cart>> getLiveCart(){
+        return spaceRepo.getCartItems();
     }
 }

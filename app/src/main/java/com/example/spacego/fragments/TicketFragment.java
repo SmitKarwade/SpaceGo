@@ -39,7 +39,7 @@ public class TicketFragment extends Fragment {
 
         cartRecylerView = view.findViewById(R.id.cartRecylerView);
         cartAdapter = new CartAdapter(cartList, getActivity());
-        cartRecylerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        cartRecylerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, true));
         cartRecylerView.setHasFixedSize(true);
         cartRecylerView.setAdapter(cartAdapter);
 
