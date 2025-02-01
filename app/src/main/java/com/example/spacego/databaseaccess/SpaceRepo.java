@@ -109,4 +109,23 @@ public class SpaceRepo {
             }
         });
     }
+
+    public void addUserDetails(UserDetails userDetails){
+       Call<Void> call = retroService.addUserDetails(userDetails);
+       call.enqueue(new Callback<Void>() {
+           @Override
+           public void onResponse(Call<Void> call, Response<Void> response) {
+               if (userDetails != null){
+                   Toast.makeText(context, "Saved", Toast.LENGTH_SHORT).show();
+               }else {
+                   Toast.makeText(context, "Empty data", Toast.LENGTH_SHORT).show();
+               }
+           }
+
+           @Override
+           public void onFailure(Call<Void> call, Throwable throwable) {
+               Toast.makeText(context, " " + throwable.getMessage().toString(), Toast.LENGTH_SHORT).show();
+           }
+       });
+    }
 }
