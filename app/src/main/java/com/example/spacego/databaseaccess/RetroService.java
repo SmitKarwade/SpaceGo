@@ -24,4 +24,10 @@ public interface RetroService {
 
     @DELETE("/cart/removeMission")
     Call<String> removeFromCart(@Query("id") Integer id);  // ResponseBody if object expected
+
+    @GET("/form/users/get")
+    Call<List<UserDetails>> getUsers();
+
+    @POST("/form/add")
+    Call<Void> addUserDetails(@Body UserDetails userDetails);
 }
