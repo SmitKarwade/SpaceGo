@@ -45,6 +45,8 @@ dependencies {
     // LiveData
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
 
+    implementation("com.razorpay:checkout:1.6.40")
+
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
