@@ -15,6 +15,7 @@ import com.example.spacego.R;
 import com.example.spacego.databaseaccess.SpaceRepo;
 import com.example.spacego.databaseaccess.UserDetails;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textview.MaterialTextView;
 
@@ -71,13 +72,26 @@ public class ClientDetailsActivity extends AppCompatActivity {
 
                     Intent intent = new Intent(ClientDetailsActivity.this, PaymentActivity.class);
                     startActivity(intent);
-
-                    Toast.makeText(ClientDetailsActivity.this, "Saved", Toast.LENGTH_SHORT).show();
                 }else {
                     Toast.makeText(ClientDetailsActivity.this, "Enter all details", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+
+        MaterialDatePicker.Builder<Long> builder = MaterialDatePicker.Builder
+                .datePicker();
+        MaterialDatePicker datePicker = builder.setTitleText("Date of birth")
+                .setInputMode(MaterialDatePicker.INPUT_MODE_CALENDAR)
+                .setSelection(System.currentTimeMillis())  // default selected date
+                .setPositiveButtonText("Done")
+                .build();
+
+        calendarButton.setOnClickListener(v -> {datePicker.show(getSupportFragmentManager(), "DATE_PICKER");});
+
+        datePicker.addOnPositiveButtonClickListener(selection -> {
+            dateEditText.setText(datePicker.getHeaderText());
+        });
+
 
     }
 }
