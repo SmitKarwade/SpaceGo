@@ -12,12 +12,15 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.spacego.R;
+import com.example.spacego.databaseaccess.Cart;
 import com.example.spacego.databaseaccess.SpaceRepo;
 import com.example.spacego.databaseaccess.UserDetails;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textview.MaterialTextView;
+
+import java.util.List;
 
 public class ClientDetailsActivity extends AppCompatActivity {
 
@@ -29,6 +32,8 @@ public class ClientDetailsActivity extends AppCompatActivity {
     private TextInputEditText addressEditText;
     private TextInputEditText emailEditText;
     private TextInputEditText mobileEditText;
+
+    private Cart item;
 
     private SpaceRepo spaceRepo = new SpaceRepo(ClientDetailsActivity.this);
 
@@ -52,6 +57,9 @@ public class ClientDetailsActivity extends AppCompatActivity {
         emailEditText = findViewById(R.id.email_txt);
         mobileEditText = findViewById(R.id.mobile_text);
 
+        Intent intent = getIntent();
+        item = intent.getParcelableExtra("cartItem");
+
 
         submit = findViewById(R.id.submit);
         submit.setOnClickListener(new View.OnClickListener() {
@@ -59,14 +67,15 @@ public class ClientDetailsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (!firstNameEditText.getText().toString().isEmpty() && !lastNameEditText.getText().toString().isEmpty()
                         && !dateEditText.getText().toString().isEmpty() && !addressEditText.getText().toString().isEmpty() &&
-                !emailEditText.getText().toString().isEmpty() && !mobileEditText.getText().toString().isEmpty()){
+                !emailEditText.getText().toString().isEmpty() && !mobileEditText.getText().toString().isEmpty() && item != null){
 
                     UserDetails user = new UserDetails(firstNameEditText.getText().toString(),
                             lastNameEditText.getText().toString(),
                             dateEditText.getText().toString(),
                             addressEditText.getText().toString(),
                             Long.parseLong(mobileEditText.getText().toString()),
-                            emailEditText.getText().toString());
+                            emailEditText.getText().toString(),
+                            List.of(item.getMissionId()));
 
                     spaceRepo.addUserDetails(user);
 
