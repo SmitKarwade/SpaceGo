@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -46,6 +47,12 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
 
     implementation("com.razorpay:checkout:1.6.40")
+
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+
+    implementation("com.google.dagger:hilt-android:2.55")
+    annotationProcessor("com.google.dagger:hilt-compiler:2.55")
+
 
     implementation(libs.appcompat)
     implementation(libs.material)
