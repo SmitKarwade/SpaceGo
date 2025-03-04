@@ -66,22 +66,23 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewholder
                 termsTextView.setText(formattedMessage);
 
                 // Build the dialog
-                new MaterialAlertDialogBuilder(context)
-                        .setTitle("Terms and Conditions")
-                        .setView(dialogView) // Set the custom view
-                        .setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss())
-                        .setPositiveButton("Continue", (dialog, which) -> {
-                            // Get the checkbox state
-                            boolean isChecked = agreeCheckbox.isChecked();
-                            if (isChecked) {
-                                // Checkbox is checked, proceed
-                                Intent intent = new Intent(context, ClientDetailsActivity.class);
-                                context.startActivity(intent);
-                            } else {
-                                Toast.makeText(context, "You must agree to the Terms and Conditions to continue.", Toast.LENGTH_SHORT).show();
-                            }
-                        })
-                        .show();
+                MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(context);
+                builder.setTitle("Terms and Conditions")
+                .setView(dialogView) // Set the custom view
+                .setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss())
+                .setPositiveButton("Continue", (dialog, which) -> {
+                    // Get the checkbox state
+                    boolean isChecked = agreeCheckbox.isChecked();
+                    if (isChecked) {
+                        // Checkbox is checked, proceed
+                        Intent intent = new Intent(context, ClientDetailsActivity.class);
+                        intent.putExtra("cartItem", item);
+                        context.startActivity(intent);
+                    } else {
+                        Toast.makeText(context, "You must agree to the Terms and Conditions to continue.", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .show();
             });
 
             holder.removeBtn.setOnClickListener(new View.OnClickListener() {
