@@ -1,7 +1,12 @@
 package com.example.spacego.databaseaccess;
 
 
-public class Cart {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+
+public class Cart implements Parcelable {
 
     private Integer cartId;
     private Integer missionId;
@@ -20,6 +25,39 @@ public class Cart {
 
     public Cart() {
     }
+
+    protected Cart(Parcel in) {
+        if (in.readInt() == 0) {
+            cartId = null;
+        } else {
+            cartId = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            missionId = null;
+        } else {
+            missionId = in.readInt();
+        }
+        missionName = in.readString();
+        missionOrg = in.readString();
+        missionSummary = in.readString();
+        if (in.readByte() == 0) {
+            amountRS = null;
+        } else {
+            amountRS = in.readFloat();
+        }
+    }
+
+    public static final Creator<Cart> CREATOR = new Creator<Cart>() {
+        @Override
+        public Cart createFromParcel(Parcel in) {
+            return new Cart(in);
+        }
+
+        @Override
+        public Cart[] newArray(int size) {
+            return new Cart[size];
+        }
+    };
 
     public Integer getCartId() {
         return cartId;
@@ -63,6 +101,36 @@ public class Cart {
 
     public void setAmountRS(Float amountRS) {
         this.amountRS = amountRS;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel dest, int flags) {
+        if (cartId == null) {
+            dest.writeInt(0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(cartId);
+        }
+        if (missionId == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(missionId);
+        }
+        dest.writeString(missionName);
+        dest.writeString(missionOrg);
+        dest.writeString(missionSummary);
+        if (amountRS == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeFloat(amountRS);
+        }
     }
 }
 
