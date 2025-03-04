@@ -1,5 +1,7 @@
 package com.example.spacego.databaseaccess;
 
+import java.util.List;
+
 public class UserDetails {
 
 //    private String id;
@@ -9,14 +11,18 @@ public class UserDetails {
     private String address;
     private Long mobno;
     private String email;
+    private List<Integer> msn_id;
 
-    public UserDetails(String first_name, String last_name, String dob, String address, Long mobno, String email) {
+
+
+    public UserDetails(String first_name, String last_name, String dob, String address, Long mobno, String email, List<Integer> msn_id) {
         this.first_name = first_name;
         this.last_name = last_name;
         this.dob = dob;
         this.address = address;
         this.mobno = mobno;
         this.email = email;
+        this.msn_id = msn_id;
     }
 
     public UserDetails() {
@@ -25,6 +31,14 @@ public class UserDetails {
 //    public String getFormId() {
 //        return id;
 //    }
+
+    public List<Integer> getMsn_id() {
+        return msn_id;
+    }
+
+    public void setMsn_id(List<Integer> msn_id) {
+        this.msn_id = msn_id;
+    }
 
 
     public String getFirst_name() {
